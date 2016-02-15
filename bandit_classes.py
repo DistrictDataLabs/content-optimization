@@ -224,6 +224,9 @@ class Bayesian2(object):
             self.arms[i]['a'] = self.default_alpha
             self.arms[i]['b'] = self.default_beta
 
+    def choose_arm(self):
+        return choose_arms(k_arms=1)[0]
+
     def choose_arms(self, k_arms=1):
         res = []
         for i in self.arms.keys():
@@ -283,6 +286,10 @@ class Bayesian3(object):
             self.arms[i] = {}
             self.arms[i]['a'] = self.default_alpha
             self.arms[i]['b'] = self.default_beta
+
+    def choose_arm(self):
+        return choose_arms(k_arms=1)[0]
+
 
     def choose_arms(self, k_arms=1):
         res = []
