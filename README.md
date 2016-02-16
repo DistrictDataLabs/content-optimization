@@ -1,10 +1,17 @@
 # content-optimization
 
 ## classes to generate data
-1. bandit_data.py
+
+bandit_data.py
 
 ## classes for multi-armed bandits
-1. bandit_classes2.py
+
+bandit_classes2.py
 
 ## command line demo
-1. 
+
+bandit_demo_commandline.py
+
+## bottle demo
+
+bandit_demo_bottle.py
