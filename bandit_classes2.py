@@ -160,7 +160,7 @@ class Bayesian(Bandit):
 		return variance
 
 class Bayesian2(Bayesian):
-	def __init__(self, n_arms = 2, a = 1, b = 1, C = 20):
+	def __init__(self, n_arms = 2, a = 1, b = 1, C = 50):
 		super().__init__(n_arms, a, b)
 		self.C = C
 		
