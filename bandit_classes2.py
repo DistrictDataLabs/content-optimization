@@ -34,6 +34,10 @@ class Bandit(object):
 		return np.mean(self.arms[arm_id]['observations'])
 
 	def get_variance(self, arm_id):
+		n = len(self.arms[arm_id]['observations'])
+		p = sum(self.arms[arm_id]['observations'])/float(n)
+		return p*(1-p)
+		#return np.sqrt(p*(1.0-p)/n)
 		return np.var(self.arms[arm_id]['observations'])
 
 	def get_expected_values_all(self):
@@ -91,14 +95,14 @@ class EpsilonDecreasing(EpsilonGreedy):
 			return np.random.choice(list(self.arms.keys()))
 		
 class UCB(Bandit):
-	def __init__(self, n_arms = 2, delta = 0.015):
+	def __init__(self, n_arms = 2, delta = 0.0015):
 		super().__init__(n_arms)
 		self.delta = delta
 
 	def get_variance(self, arm_id):
 		T = float(sum([len(self.arms[i]['observations']) for i in self.arms.keys()]))
 		n = float(len(self.arms[arm_id]['observations']))
-		return self.delta*1.96*sqrt(2*T/n)
+		return self.delta*1.96*sqrt(2*np.log(T)/n)
 
 	def choose_arm(self):
 		ucbs = []
