@@ -1,6 +1,6 @@
 from bottle import route, run, template
 import numpy as np
-from BanditClasses import Bayesian2
+from bandit_classes import Bayesian2
 
 @route('/')
 def index():
@@ -23,17 +23,20 @@ def no():
 		 arm_data=arm_data)
 
 def get_next_button_color():
-	next_arm_index = bandit.choose_arms()[0]
 	global current_arm_index
-	current_arm_index = next_arm_index
+	current_arm_index = bandit.choose_arm()
 	return colors[current_arm_index]
+	#return colors[current_arm_index]
 
 def get_bandit_arm_data():
-	arm_data = bandit.get_arm_data()
-	arm_data = list(zip(range(len(colors)), [e[0] for e in arm_data]))
+	#arm_data = bandit.get_arm_data()
+	means = bandit.get_expected_values_all()
+	#variances = bandit.get_variances_all()
+	#arm_data = zip(means, variances)
+	arm_data = list(zip(range(len(colors)), means))
 	return arm_data
 
 current_arm_index = -1
 colors = ['red', 'green', 'blue']
-bandit = Bayesian2(k=len(colors))
+bandit = Bayesian2(n_arms=len(colors))
 run(host='localhost', port=8089, reloader=True)
