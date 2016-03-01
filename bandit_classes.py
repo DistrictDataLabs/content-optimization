@@ -95,7 +95,7 @@ class EpsilonDecreasing(EpsilonGreedy):
 			return np.random.choice(list(self.arms.keys()))
 		
 class UCB(Bandit):
-	def __init__(self, n_arms = 2, delta = 0.0015):
+	def __init__(self, n_arms = 2, delta = 0.1):
 		super().__init__(n_arms)
 		self.delta = delta
 
